@@ -16,7 +16,7 @@ export default function Vender() {
     });
 
     useEffect(() => {
-        fetch('http://localhost:3001/api/categorias')
+        fetch(`${process.env.REACT_APP_API_URL}/api/categorias`)
             .then(res => res.json())
             .then(datos => {
                 setCategorias(datos);
@@ -73,7 +73,7 @@ export default function Vender() {
                 const dataArchivo = new FormData();
                 dataArchivo.append('imagen', archivo);
 
-                const uploadRes = await fetch('http://localhost:3001/api/upload', {
+                const uploadRes = await fetch('${process.env.REACT_APP_API_URL}/api/upload', {
                     method: 'POST',
                     body: dataArchivo
                 });
@@ -89,7 +89,7 @@ export default function Vender() {
                 imagenes: urlsCloudinary
             };
 
-            const response = await fetch('http://localhost:3001/api/articulos', {
+            const response = await fetch('${process.env.REACT_APP_API_URL}/api/articulos', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)

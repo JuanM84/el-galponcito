@@ -20,13 +20,13 @@ export default function Home() {
     useEffect(() => {
         setCargando(true);
 
-        let urlArticulos = new URL('http://localhost:3001/api/articulos');
+        let urlArticulos = new URL(`${process.env.REACT_APP_API_URL}/api/articulos`);
         if (terminoBusqueda) urlArticulos.searchParams.append('busqueda', terminoBusqueda);
         if (categoriaSeleccionada) urlArticulos.searchParams.append('categoria', categoriaSeleccionada);
         urlArticulos.searchParams.append('pagina', paginaActual); // NUEVO: Mandamos la página al backend
 
         Promise.all([
-            fetch('http://localhost:3001/api/categorias').then(res => res.json()),
+            fetch(`${process.env.REACT_APP_API_URL}/api/categorias`).then(res => res.json()),
             fetch(urlArticulos.toString()).then(res => res.json())
         ])
             .then(([datosCategorias, respuestaArticulos]) => {
@@ -110,9 +110,9 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-gray-900 mb-6">Categorías</h2>
                     <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                         {categorias.map((cat) => (
-                            <button key={cat.id} onClick={() => filtrarPorCategoria(cat.slug)} className={`flex flex-col items-center justify-center p-6 rounded-2xl shadow-sm border transition-all group ${categoriaSeleccionada === cat.slug ? 'bg-emerald-900 border-emerald-900 text-white shadow-emerald-200' : 'bg-white border-gray-100 text-gray-800 hover:shadow-md'}`}>
-                                <div className={`p-4 rounded-full mb-3 transition-colors ${categoriaSeleccionada === cat.slug ? 'bg-emerald-800' : 'bg-gray-50 group-hover:bg-emerald-50'}`}>
-                                    <Tag className={`h-6 w-6 ${categoriaSeleccionada === cat.slug ? 'text-emerald-100' : 'text-emerald-800'}`} />
+                            <button key={cat.id} onClick={() => filtrarPorCategoria(cat.slug)} className={`flex flex - col items - center justify - center p - 6 rounded - 2xl shadow - sm border transition - all group ${categoriaSeleccionada === cat.slug ? 'bg-emerald-900 border-emerald-900 text-white shadow-emerald-200' : 'bg-white border-gray-100 text-gray-800 hover:shadow-md'} `}>
+                                <div className={`p - 4 rounded - full mb - 3 transition - colors ${categoriaSeleccionada === cat.slug ? 'bg-emerald-800' : 'bg-gray-50 group-hover:bg-emerald-50'} `}>
+                                    <Tag className={`h - 6 w - 6 ${categoriaSeleccionada === cat.slug ? 'text-emerald-100' : 'text-emerald-800'} `} />
                                 </div>
                                 <span className="font-medium text-sm">{cat.nombre}</span>
                             </button>
@@ -144,7 +144,7 @@ export default function Home() {
                     <>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
                             {articulos.map((articulo) => (
-                                <Link to={`/articulo/${articulo.id}`} key={articulo.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 transition-all group cursor-pointer block">
+                                <Link to={`/ articulo / ${articulo.id} `} key={articulo.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 transition-all group cursor-pointer block">
                                     <div className="relative aspect-square bg-gray-100 overflow-hidden">
                                         <img src={articulo.imagenes[0]} alt={articulo.titulo} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={(e) => { e.target.src = 'https://via.placeholder.com/500?text=Sin+Imagen' }} />
                                         <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md text-[10px] font-bold text-gray-800 uppercase tracking-wider">{articulo.condicion}</span>
@@ -166,7 +166,7 @@ export default function Home() {
                                 <button
                                     onClick={() => cambiarPagina(paginaActual - 1)}
                                     disabled={paginaActual === 1}
-                                    className={`p-2 rounded-full border ${paginaActual === 1 ? 'border-gray-200 text-gray-400 cursor-not-allowed' : 'border-gray-300 text-emerald-900 hover:bg-emerald-50 transition-colors'}`}
+                                    className={`p - 2 rounded - full border ${paginaActual === 1 ? 'border-gray-200 text-gray-400 cursor-not-allowed' : 'border-gray-300 text-emerald-900 hover:bg-emerald-50 transition-colors'} `}
                                 >
                                     <ChevronLeft className="h-5 w-5" />
                                 </button>
@@ -178,7 +178,7 @@ export default function Home() {
                                 <button
                                     onClick={() => cambiarPagina(paginaActual + 1)}
                                     disabled={paginaActual === totalPaginas}
-                                    className={`p-2 rounded-full border ${paginaActual === totalPaginas ? 'border-gray-200 text-gray-400 cursor-not-allowed' : 'border-gray-300 text-emerald-900 hover:bg-emerald-50 transition-colors'}`}
+                                    className={`p - 2 rounded - full border ${paginaActual === totalPaginas ? 'border-gray-200 text-gray-400 cursor-not-allowed' : 'border-gray-300 text-emerald-900 hover:bg-emerald-50 transition-colors'} `}
                                 >
                                     <ChevronRight className="h-5 w-5" />
                                 </button>
