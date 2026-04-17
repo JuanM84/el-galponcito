@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import Vender from './pages/Vender';
 import Admin from './pages/Admin';
 import Detalle from './pages/Detalle';
-import Login from './pages/login';
+import Login from './pages/Login';
 
 function NavbarGlobal() {
   const [searchParams] = useSearchParams();
