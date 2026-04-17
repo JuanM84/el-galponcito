@@ -20,13 +20,13 @@ export default function Home() {
     useEffect(() => {
         setCargando(true);
 
-        let urlArticulos = new URL(`${process.env.REACT_APP_API_URL}/api/articulos`);
+        let urlArticulos = new URL(`${import.meta.env.VITE_API_URL}/api/articulos`);
         if (terminoBusqueda) urlArticulos.searchParams.append('busqueda', terminoBusqueda);
         if (categoriaSeleccionada) urlArticulos.searchParams.append('categoria', categoriaSeleccionada);
         urlArticulos.searchParams.append('pagina', paginaActual); // NUEVO: Mandamos la página al backend
 
         Promise.all([
-            fetch(`${process.env.REACT_APP_API_URL}/api/categorias`).then(res => res.json()),
+            fetch(`${import.meta.env.VITE_API_URL}/api/categorias`).then(res => res.json()),
             fetch(urlArticulos.toString()).then(res => res.json())
         ])
             .then(([datosCategorias, respuestaArticulos]) => {

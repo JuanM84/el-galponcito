@@ -25,7 +25,7 @@ export default function Admin() {
         setCargando(true);
         try {
             const endpoint = tab === 'categorias' ? 'categorias' : `articulos/${tab}`;
-            const res = await fetch(`${process.env.REACT_APP_API_URL}/api/${endpoint}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/${endpoint}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const datos = await res.json();
@@ -38,7 +38,7 @@ export default function Admin() {
     // --- ACCIONES DE MODERACIÓN Y VENTA ---
     const manejarEstado = async (id, nuevoEstado) => {
         try {
-            const res = await fetch(`${process.env.REACT_APP_API_URL}/api/articulos/${id}/estado`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/articulos/${id}/estado`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ export default function Admin() {
 
     const verInteresados = async (id, titulo) => {
         try {
-            const res = await fetch(`${process.env.REACT_APP_API_URL}/api/articulos/${id}/interesados`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/articulos/${id}/interesados`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const lista = await res.json();
@@ -67,7 +67,7 @@ export default function Admin() {
     // --- GESTIÓN DE CATEGORÍAS ---
     const crearCategoria = async (e) => {
         e.preventDefault();
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/categorias`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/categorias`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
             body: JSON.stringify(nuevaCat)
@@ -87,7 +87,7 @@ export default function Admin() {
 
     const ejecutarBorrarCategoria = async (id) => {
         setModalConfirmacion({ ...modalConfirmacion, abierto: false }); // Cerramos modal
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/categorias/${id}`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/categorias/${id}`, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${token}` }
         });
@@ -106,7 +106,7 @@ export default function Admin() {
 
     const ejecutarBorrarPermanente = async (id) => {
         setModalConfirmacion({ ...modalConfirmacion, abierto: false });
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/articulos/${id}`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/articulos/${id}`, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${token}` }
         });

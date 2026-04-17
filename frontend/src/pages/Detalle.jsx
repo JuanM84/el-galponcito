@@ -21,7 +21,7 @@ export default function Detalle() {
     const [formData, setFormData] = useState({});
 
     useEffect(() => {
-        const urlFetch = esAdmin ? `${process.env.REACT_APP_API_URL}/api/articulos/admin/${id}` : `${process.env.REACT_APP_API_URL}/api/articulos/${id}`;
+        const urlFetch = esAdmin ? `${import.meta.env.VITE_API_URL}/api/articulos/admin/${id}` : `${import.meta.env.VITE_API_URL}/api/articulos/${id}`;
         const opcionesFetch = {};
 
         if (esAdmin) {
@@ -29,7 +29,7 @@ export default function Detalle() {
             opcionesFetch.headers = { 'Authorization': `Bearer ${token}` };
 
             // Si es admin, también traemos las categorías por si quiere cambiarla
-            fetch(`${process.env.REACT_APP_API_URL}/api/categorias`)
+            fetch(`${import.meta.env.VITE_API_URL}/api/categorias`)
                 .then(res => res.json())
                 .then(data => setCategorias(data));
         }
@@ -66,7 +66,7 @@ export default function Detalle() {
     const guardarCambios = async () => {
         const token = localStorage.getItem('token_galponcito');
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/articulos/${id}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/articulos/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ export default function Detalle() {
         setEstadoContacto({ cargando: true, mensaje: '', error: '' });
 
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/articulos/${id}/interesar`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/articulos/${id}/interesar`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: emailContacto })
