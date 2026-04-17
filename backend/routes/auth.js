@@ -19,7 +19,7 @@ router.post('/login', (req, res) => {
     }
 });
 
-router.post('/crear-admin', async (req, res) => {
+router.get('/crear-admin', async (req, res) => {
     try {
         const hash = await bcrypt.hash('admin123', 10);
         await pool.query(
