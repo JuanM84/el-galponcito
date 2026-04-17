@@ -1,0 +1,67 @@
+services:
+  # 1. La Base de Datos (PostgreSQL)
+  db:
+    image: postgres:15-alpine
+    container_name: galponcito_db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpassword123 # Cambiaremos esto en producción
+      POSTGRES_DB: elgalponcito
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # 2. Interfaz visual para la Base de Datos
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: galponcito_pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@elgalponcito.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+
+  # 3. El Backend (Node.js - Preparando el terreno)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: galponcito_backend
+    ports:
+      - "3001:3001"
+    environment:
+      - DB_HOST=db
+      - DB_USER=admin
+      - DB_PASSWORD=adminpassword123
+      - DB_NAME=elgalponcito
+      - PORT=3001
+    depends_on:
+      - db
+    volumes:
+      # Para que los cambios en el código se reflejen en tiempo real
+      - ./backend:/app
+      - /app/node_modules
+
+  # 4. El Frontend (React - Preparando el terreno)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: galponcito_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:3001
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+volumes:
+  pgdata: # Esto guarda los datos para que no se borren si apagas el contenedor
