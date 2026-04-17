@@ -73,7 +73,7 @@ export default function Vender() {
                 const dataArchivo = new FormData();
                 dataArchivo.append('imagen', archivo);
 
-                const uploadRes = await fetch('${import.meta.env.VITE_API_URL}/api/upload', {
+                const uploadRes = await fetch(`${import.meta.env.VITE_API_URL}/api/upload`, {
                     method: 'POST',
                     body: dataArchivo
                 });
@@ -89,7 +89,7 @@ export default function Vender() {
                 imagenes: urlsCloudinary
             };
 
-            const response = await fetch('${import.meta.env.VITE_API_URL}/api/articulos', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/articulos`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
