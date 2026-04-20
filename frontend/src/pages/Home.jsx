@@ -92,7 +92,7 @@ export default function Home() {
                             <div className="absolute bottom-8 left-8 right-8 bg-white p-4 rounded-xl shadow-lg flex items-center space-x-4">
                                 <div className="bg-emerald-100 p-3 rounded-full"><ShieldCheck className="h-6 w-6 text-emerald-700" /></div>
                                 <div>
-                                    <p className="font-bold text-gray-900 text-sm">Compra protegida</p>
+                                    <p className="font-bold text-emerald-50 text-sm">Compra protegida</p>
                                     <p className="text-xs text-gray-500">Garantía de devolución por 10 días</p>
                                 </div>
                             </div>
@@ -103,13 +103,21 @@ export default function Home() {
 
             {!terminoBusqueda && (
                 <div id="seccion-categorias" className="mb-16 scroll-mt-24">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Categorías</h2>
+                    <h2 className="text-2xl font-bold text-emerald-50 mb-6">Categorías</h2>
                     <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                         {categorias.map((cat) => (
-                            <button key={cat.id} onClick={() => filtrarPorCategoria(cat.slug)} className={`flex flex - col items - center justify - center p - 6 rounded - 2xl shadow - sm border transition - all group ${categoriaSeleccionada === cat.slug ? 'bg-emerald-900 border-emerald-900 text-white shadow-emerald-200' : 'bg-white border-gray-100 text-gray-800 hover:shadow-md'} `}>
-                                <div className={`p - 4 rounded - full mb - 3 transition - colors ${categoriaSeleccionada === cat.slug ? 'bg-emerald-800' : 'bg-gray-50 group-hover:bg-emerald-50'} `}>
-                                    <Tag className={`h - 6 w - 6 ${categoriaSeleccionada === cat.slug ? 'text-emerald-100' : 'text-emerald-800'} `} />
-                                </div>
+                            <button
+                                key={cat.id}
+                                onClick={() => filtrarPorCategoria(cat.slug)}
+                                className={`flex items-center gap-2 px-5 py-2.5 rounded-full border shadow-sm transition-all cursor-pointer ${categoriaSeleccionada === cat.slug
+                                    ? 'bg-emerald-900 border-emerald-900 text-white shadow-emerald-200/50'
+                                    : 'bg-white border-gray-200 text-gray-700 hover:border-emerald-300 hover:shadow-md hover:text-emerald-800'
+                                    }`}
+                            >
+                                <Tag className={`w-5 h-5 transition-colors ${categoriaSeleccionada === cat.slug
+                                    ? 'text-emerald-100'
+                                    : 'text-emerald-600'
+                                    }`} />
                                 <span className="font-medium text-sm">{cat.nombre}</span>
                             </button>
                         ))}
@@ -121,7 +129,7 @@ export default function Home() {
             <div className="mb-12">
                 <div className="flex justify-between items-end mb-6 border-b border-gray-200 pb-4">
                     <div>
-                        <h2 className="text-2xl font-bold text-gray-900">{tituloSeccion}</h2>
+                        <h2 className="text-2xl font-bold text-emerald-50">{tituloSeccion}</h2>
                     </div>
                     {(terminoBusqueda || categoriaSeleccionada) && (
                         <button onClick={() => setSearchParams({})} className="text-emerald-700 hover:text-emerald-800 font-medium text-sm">Limpiar filtros ✕</button>
@@ -146,7 +154,7 @@ export default function Home() {
                                         <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md text-[10px] font-bold text-gray-800 uppercase tracking-wider">{articulo.condicion}</span>
                                     </div>
                                     <div className="p-4">
-                                        <h3 className="font-semibold text-gray-900 mb-1 truncate">{articulo.titulo}</h3>
+                                        <h3 className="font-semibold text-emerald-50 mb-1 truncate">{articulo.titulo}</h3>
                                         <div className="flex justify-between items-center mt-4">
                                             <span className="text-lg font-bold text-emerald-900">{formatearPrecio(articulo.precio)}</span>
                                             <ShoppingCart className="h-5 w-5 text-gray-400" />
@@ -168,7 +176,7 @@ export default function Home() {
                                 </button>
 
                                 <span className="text-sm font-medium text-gray-600">
-                                    Página <strong className="text-gray-900">{paginaActual}</strong> de {totalPaginas}
+                                    Página <strong className="text-emerald-50">{paginaActual}</strong> de {totalPaginas}
                                 </span>
 
                                 <button

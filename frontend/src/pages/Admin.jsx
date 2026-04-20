@@ -184,7 +184,7 @@ export default function Admin() {
                                     <div className="flex items-center gap-5">
                                         <img src={art.imagenes[0]} className={`w-20 h-20 object-cover rounded-2xl ${tab === 'vendidos' ? 'grayscale opacity-50' : ''}`} alt="" />
                                         <div>
-                                            <h3 className={`font-bold text-lg ${tab === 'vendidos' ? 'text-gray-400 line-through' : 'text-gray-900'}`}>{art.titulo}</h3>
+                                            <h3 className={`font-bold text-lg ${tab === 'vendidos' ? 'text-gray-400 line-through' : 'text-emerald-50'}`}>{art.titulo}</h3>
                                             <p className="text-emerald-700 font-black">${new Intl.NumberFormat('es-AR').format(art.precio)}</p>
                                         </div>
                                     </div>

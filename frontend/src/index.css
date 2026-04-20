@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+body {
+  background-image: 
+    linear-gradient(rgba(10, 59, 36, 0.7), rgba(10, 59, 36, 0.7)), /* Verde Inglés */
+    url('/fondo-garaje.jpg');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  background-attachment: fixed;
+}

@@ -131,7 +131,7 @@ export default function Vender() {
 
                 {/* SECCIÓN 1: DATOS PÚBLICOS */}
                 <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 space-y-6">
-                    <h2 className="text-xl font-bold text-gray-900 border-b pb-2">1. Detalles del Artículo</h2>
+                    <h2 className="text-xl font-bold text-emerald-50 border-b pb-2">1. Detalles del Artículo</h2>
                     {/* ... inputs de titulo, precio, condicion, categoria, descripcion (Igual que antes) ... */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Título del artículo</label>
@@ -169,7 +169,7 @@ export default function Vender() {
                 <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 space-y-6">
                     <div className="flex items-center gap-2 border-b pb-2">
                         <Camera className="h-6 w-6 text-emerald-800" />
-                        <h2 className="text-xl font-bold text-gray-900">2. Galería de Fotos</h2>
+                        <h2 className="text-xl font-bold text-emerald-50">2. Galería de Fotos</h2>
                     </div>
                     <p className="text-sm text-gray-500">Sube hasta 4 imágenes claras de tu artículo. La primera será la portada.</p>
 
@@ -215,7 +215,7 @@ export default function Vender() {
                     <div className="absolute top-0 right-0 bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-bl-lg">SOLO ADMIN</div>
                     <div className="flex items-center gap-2 border-b border-gray-200 pb-2">
                         <Lock className="h-5 w-5 text-gray-600" />
-                        <h2 className="text-xl font-bold text-gray-900">3. Datos de Contacto</h2>
+                        <h2 className="text-xl font-bold text-emerald-50">3. Datos de Contacto</h2>
                     </div>
                     {/* ... inputs de telefono, email, zona (Igual que antes) ... */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
