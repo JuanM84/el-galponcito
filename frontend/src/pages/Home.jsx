@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { ShieldCheck, Tag, Heart, ShoppingCart, SearchX, ChevronLeft, ChevronRight } from 'lucide-react'; // Sumamos las flechitas
+import { ShieldCheck, Tag, Heart, ShoppingCart, SearchX, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function Home() {
     const [searchParams, setSearchParams] = useSearchParams();
     const terminoBusqueda = searchParams.get('busqueda');
     const categoriaSeleccionada = searchParams.get('categoria');
-    const paginaActual = parseInt(searchParams.get('pagina')) || 1; // NUEVO: Leemos la página
+    const paginaActual = parseInt(searchParams.get('pagina')) || 1;
 
     const [categorias, setCategorias] = useState([]);
     const [articulos, setArticulos] = useState([]);
-    const [totalPaginas, setTotalPaginas] = useState(1); // NUEVO: Estado para el total de páginas
+    const [totalPaginas, setTotalPaginas] = useState(1);
     const [cargando, setCargando] = useState(true);
 
     const formatearPrecio = (precio) => {
@@ -23,7 +23,7 @@ export default function Home() {
         let urlArticulos = new URL(`${import.meta.env.VITE_API_URL}/api/articulos`);
         if (terminoBusqueda) urlArticulos.searchParams.append('busqueda', terminoBusqueda);
         if (categoriaSeleccionada) urlArticulos.searchParams.append('categoria', categoriaSeleccionada);
-        urlArticulos.searchParams.append('pagina', paginaActual); // NUEVO: Mandamos la página al backend
+        urlArticulos.searchParams.append('pagina', paginaActual);
 
         Promise.all([
             fetch(`${import.meta.env.VITE_API_URL}/api/categorias`).then(res => res.json()),
@@ -31,14 +31,13 @@ export default function Home() {
         ])
             .then(([datosCategorias, respuestaArticulos]) => {
                 setCategorias(datosCategorias);
-                // OJO ACÁ: La respuesta cambió de formato
                 setArticulos(respuestaArticulos.datos || []);
                 setTotalPaginas(respuestaArticulos.paginacion?.totalPaginas || 1);
                 setCargando(false);
                 if (searchParams.get('scroll') === 'categorias') {
                     setTimeout(() => {
                         document.getElementById('seccion-categorias')?.scrollIntoView({ behavior: 'smooth' });
-                    }, 300); // Le damos 300ms a React para que dibuje la pantalla primero
+                    }, 300);
                 } else {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
@@ -47,7 +46,7 @@ export default function Home() {
                 console.error("Error buscando datos:", error);
                 setCargando(false);
             });
-    }, [terminoBusqueda, categoriaSeleccionada, paginaActual]); // Reacciona si cambia la página
+    }, [terminoBusqueda, categoriaSeleccionada, paginaActual]);
 
     const filtrarPorCategoria = (slug) => {
         const nuevosParametros = new URLSearchParams(searchParams);
@@ -56,7 +55,6 @@ export default function Home() {
         } else {
             nuevosParametros.set('categoria', slug);
         }
-        // Si cambiamos de categoría, SIEMPRE volvemos a la página 1
         nuevosParametros.set('pagina', '1');
         setSearchParams(nuevosParametros);
     };
@@ -83,7 +81,6 @@ export default function Home() {
             {/* HERO SECTION (Se oculta si hay filtros o si NO estamos en la página 1) */}
             {(!terminoBusqueda && !categoriaSeleccionada && paginaActual === 1) && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-                    {/* ... Código de tu Hero (Mismo de siempre) ... */}
                     <div>
                         <span className="inline-block py-1 px-3 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold tracking-wider mb-6">MERCADO CURADO</span>
                         <h1 className="text-5xl lg:text-6xl font-extrabold text-emerald-950 leading-tight mb-6">Dale una segunda vida a lo que ya no usas.</h1>
@@ -104,7 +101,6 @@ export default function Home() {
                 </div>
             )}
 
-            {/* CATEGORÍAS (Se ocultan si hay búsqueda, pero se mantienen al paginar) */}
             {!terminoBusqueda && (
                 <div id="seccion-categorias" className="mb-16 scroll-mt-24">
                     <h2 className="text-2xl font-bold text-gray-900 mb-6">Categorías</h2>
@@ -144,7 +140,7 @@ export default function Home() {
                     <>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
                             {articulos.map((articulo) => (
-                                <Link to={`/ articulo / ${articulo.id} `} key={articulo.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 transition-all group cursor-pointer block">
+                                <Link to={`/articulo/${articulo.id} `} key={articulo.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 transition-all group cursor-pointer block">
                                     <div className="relative aspect-square bg-gray-100 overflow-hidden">
                                         <img src={articulo.imagenes[0]} alt={articulo.titulo} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={(e) => { e.target.src = 'https://via.placeholder.com/500?text=Sin+Imagen' }} />
                                         <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md text-[10px] font-bold text-gray-800 uppercase tracking-wider">{articulo.condicion}</span>
@@ -160,7 +156,7 @@ export default function Home() {
                             ))}
                         </div>
 
-                        {/* NUEVO: CONTROLES DE PAGINACIÓN */}
+                        {/* CONTROLES DE PAGINACIÓN */}
                         {totalPaginas > 1 && (
                             <div className="flex justify-center items-center space-x-4 mt-8">
                                 <button
