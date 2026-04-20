@@ -178,9 +178,9 @@ export default function Detalle() {
 
                             {/* TÍTULO */}
                             {editando ? (
-                                <input type="text" name="titulo" value={formData.titulo} onChange={manejarCambio} className="w-full text-3xl font-extrabold text-gray-900 border-b-2 border-emerald-500 focus:outline-none mb-2" />
+                                <input type="text" name="titulo" value={formData.titulo} onChange={manejarCambio} className="w-full text-3xl font-extrabold text-emerald-700 border-b-2 border-emerald-500 focus:outline-none mb-2" />
                             ) : (
-                                <h1 className="text-3xl md:text-4xl font-extrabold text-emerald-50 mb-2 leading-tight">{articulo.titulo}</h1>
+                                <h1 className="text-3xl md:text-4xl font-extrabold text-emerald-500 mb-2 leading-tight">{articulo.titulo}</h1>
                             )}
 
                             {/* PRECIO */}
@@ -194,7 +194,7 @@ export default function Detalle() {
                             )}
                         </div>
 
-                        <div className="prose prose-emerald text-gray-600 mb-8">
+                        <div className="prose prose-emerald text-gray-700 mb-8">
                             {/* DESCRIPCIÓN */}
                             {editando ? (
                                 <textarea name="descripcion" value={formData.descripcion} onChange={manejarCambio} rows="5" className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-emerald-500" />
