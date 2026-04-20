@@ -64,6 +64,9 @@ export default function Home() {
         nuevosParametros.set('pagina', nuevaPagina);
         setSearchParams(nuevosParametros);
     };
+    const LimpiarFiltros = () => {
+        setSearchParams({});
+    };
 
     let tituloSeccion = "Recién llegados";
     if (terminoBusqueda && categoriaSeleccionada) {
@@ -82,20 +85,19 @@ export default function Home() {
             {(!terminoBusqueda && !categoriaSeleccionada && paginaActual === 1) && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
                     <div>
-                        <span className="inline-block py-1 px-3 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold tracking-wider mb-6">MERCADO CURADO</span>
+                        <span className="inline-block py-1 px-3 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold tracking-wider mb-6">MERCADO DE OFERTAS</span>
                         <h1 className="text-5xl lg:text-6xl font-extrabold text-emerald-950 leading-tight mb-6">Dale una segunda vida a lo que ya no usas.</h1>
                         <p className="text-lg text-gray-600 mb-8 max-w-lg">Encuentra tesoros únicos cerca tuyo. Un marketplace pensado para quienes valoran la calidad y la historia de cada objeto.</p>
                     </div>
-                    <div className="relative">
-                        <div className="aspect-[4/5] bg-emerald-800 rounded-[2rem] overflow-hidden relative shadow-2xl">
-                            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-900 to-emerald-700 opacity-60"></div>
-                            <div className="absolute bottom-8 left-8 right-8 bg-white p-4 rounded-xl shadow-lg flex items-center space-x-4">
-                                <div className="bg-emerald-100 p-3 rounded-full"><ShieldCheck className="h-6 w-6 text-emerald-700" /></div>
-                                <div>
-                                    <p className="font-bold text-emerald-50 text-sm">Compra protegida</p>
-                                    <p className="text-xs text-gray-500">Garantía de devolución por 10 días</p>
-                                </div>
-                            </div>
+                    <div className="p-2 rounded-[2rem] shadow-xl">
+                        {/* Contenedor de la Imagen */}
+                        <div className="relative w-full h-64 md:h-96 rounded-[1.5rem] overflow-hidden">
+                            {/* La Imagen */}
+                            <img
+                                src="/intercambio7-5.png"
+                                alt="Fondo El Galponcito"
+                                className="w-full h-full object-cover"
+                            />
                         </div>
                     </div>
                 </div>
@@ -132,7 +134,7 @@ export default function Home() {
                         <h2 className="text-2xl font-bold text-emerald-50">{tituloSeccion}</h2>
                     </div>
                     {(terminoBusqueda || categoriaSeleccionada) && (
-                        <button onClick={() => setSearchParams({})} className="text-emerald-700 hover:text-emerald-800 font-medium text-sm">Limpiar filtros ✕</button>
+                        <button onClick={LimpiarFiltros} className="text-emerald-700 hover:text-emerald-800 font-medium text-sm">Limpiar filtros ✕</button>
                     )}
                 </div>
 
