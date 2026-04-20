@@ -122,16 +122,16 @@ export default function Admin() {
 
             {/* SELECTOR DE PESTAÑAS */}
             <div className="flex gap-4 mb-8 border-b border-gray-200 overflow-x-auto">
-                <button onClick={() => setTab('pendientes')} className={`pb-4 px-4 font-bold whitespace-nowrap ${tab === 'pendientes' ? 'border-b-2 border-emerald-600 text-emerald-900' : 'text-gray-400'}`}>
+                <button onClick={() => setTab('pendientes')} className={`pb-4 px-4 font-bold whitespace-nowrap ${tab === 'pendientes' ? 'border-b-2 border-emerald-600 text-emerald-900' : 'text-white'}`}>
                     Nuevos por revisar
                 </button>
-                <button onClick={() => setTab('publicados')} className={`pb-4 px-4 font-bold whitespace-nowrap ${tab === 'publicados' ? 'border-b-2 border-emerald-600 text-emerald-900' : 'text-gray-400'}`}>
+                <button onClick={() => setTab('publicados')} className={`pb-4 px-4 font-bold whitespace-nowrap ${tab === 'publicados' ? 'border-b-2 border-emerald-600 text-emerald-900' : 'text-white'}`}>
                     Inventario Activo
                 </button>
-                <button onClick={() => setTab('vendidos')} className={`pb-4 px-4 font-bold whitespace-nowrap ${tab === 'vendidos' ? 'border-b-2 border-emerald-600 text-emerald-900' : 'text-gray-400'}`}>
+                <button onClick={() => setTab('vendidos')} className={`pb-4 px-4 font-bold whitespace-nowrap ${tab === 'vendidos' ? 'border-b-2 border-emerald-600 text-emerald-900' : 'text-white'}`}>
                     Vendidos (Archivo)
                 </button>
-                <button onClick={() => setTab('categorias')} className={`pb-4 px-4 font-bold whitespace-nowrap ${tab === 'categorias' ? 'border-b-2 border-emerald-600 text-emerald-900' : 'text-gray-400'}`}>
+                <button onClick={() => setTab('categorias')} className={`pb-4 px-4 font-bold whitespace-nowrap ${tab === 'categorias' ? 'border-b-2 border-emerald-600 text-emerald-900' : 'text-white'}`}>
                     Categorías
                 </button>
             </div>
@@ -184,7 +184,7 @@ export default function Admin() {
                                     <div className="flex items-center gap-5">
                                         <img src={art.imagenes[0]} className={`w-20 h-20 object-cover rounded-2xl ${tab === 'vendidos' ? 'grayscale opacity-50' : ''}`} alt="" />
                                         <div>
-                                            <h3 className={`font-bold text-lg ${tab === 'vendidos' ? 'text-gray-400 line-through' : 'text-emerald-50'}`}>{art.titulo}</h3>
+                                            <h3 className={`font-bold text-lg ${tab === 'vendidos' ? 'text-gray-400 line-through' : 'text-emerald-500'}`}>{art.titulo}</h3>
                                             <p className="text-emerald-700 font-black">${new Intl.NumberFormat('es-AR').format(art.precio)}</p>
                                         </div>
                                     </div>
